@@ -1,0 +1,28 @@
+.button {
+  background: #167390;
+  border-radius: 5px;
+  width: 100%;
+  padding: 0.9rem 0.625rem;
+  border: 0.5px solid transparent;
+  text-align: center;
+  font-weight: 600;
+  color: #ffffff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  &:active {
+    transform: scale(0.99);
+  }
+  &:disabled {
+    background: hsla(
+      hue(#167390),
+      saturation(#167390),
+      lightness(#167390),
+      0.7
+    );
+    cursor: not-allowed;
+  }
+  span {
+    margin-left: 13.71px;
+  }
+}

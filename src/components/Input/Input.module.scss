@@ -1,0 +1,71 @@
+.input {
+  padding: 15px;
+  border: 1px solid rgba(234, 236, 240, 0.7);
+  border-radius: 4px;
+  background-color: #ffffff;
+  &_content {
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    & > input[type="text"],
+    input[type="number"] {
+      box-sizing: border-box;
+      border: none;
+      font-size: 13px;
+      width: 100%;
+      outline: none;
+      &::-webkit-input-placeholder {
+        color: #98a2b3;
+      }
+      &:-moz-placeholder {
+        color: #98a2b3;
+      }
+      &::-moz-placeholder {
+        color: #98a2b3;
+      }
+      &:-ms-input-placeholder {
+        color: #98a2b3;
+      }
+      &::-ms-input-placeholder {
+        color: #98a2b3;
+      }
+      &::placeholder {
+        color: #98a2b3;
+      }
+
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        box-shadow: 0 0 0 30px white inset !important;
+      }
+    }
+
+    &_icon {
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &_passicon {
+      border: none;
+      padding: 0;
+      background-color: transparent;
+      outline: none;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  }
+}
+
+.errored {
+  border: 1px solid #ff5959 !important;
+}
+
+.error {
+  position: absolute;
+  color: #ff5959;
+  font-size: 10px;
+  font-weight: 400;
+}
