@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -7,16 +6,17 @@ import osmtogeojson from "osmtogeojson";
 import useToast from "../../util/useToast";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import MapModal from "../../modal_views/MapModal";
 import HomeStyles from "./Home.module.scss";
 
 const Home = () => {
   const Toast = useToast();
-  const navigate = useNavigate();
   const client = axios.create({
     baseURL: `https://www.openstreetmap.org/api/0.6/map`,
   });
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const inputValidationSchema = Yup.object().shape({
     top: Yup.string().required("Required"),
@@ -47,7 +47,7 @@ const Home = () => {
               setLoading(false);
               const geoJSON = osmtogeojson(data);
               console.log(geoJSON, "geojson");
-              Toast.success("working");
+              setShowModal(true);
             }
           });
       } catch (error: any) {
@@ -57,8 +57,21 @@ const Home = () => {
     },
   });
 
+  const renderModal = () => {
+    const mapModal = (
+      <MapModal
+        showMapModal={showModal}
+        onCloseMapModal={() => setShowModal(false)}
+        onClickAwayMapModal={() => setShowModal(false)}
+      />
+    );
+
+    return mapModal;
+  };
+
   return (
     <div className={HomeStyles.home}>
+      {renderModal()}
       <div className={HomeStyles.home_content}>
         <div className={HomeStyles.home_content_children}>
           <div className={HomeStyles.home_content_children_logo}>
