@@ -1,13 +1,28 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+import osmtogeojson from "osmtogeojson";
+import useToast from "../../util/useToast";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import HomeStyles from "./Home.module.scss";
 
 const Home = () => {
+  const Toast = useToast();
+  const navigate = useNavigate();
+  const client = axios.create({
+    baseURL: `https://www.openstreetmap.org/api/0.6/map`,
+  });
+
+  const [loading, setLoading] = useState<boolean>(false);
+
   const inputValidationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Required"),
-    password: Yup.string().required("Required"),
+    top: Yup.string().required("Required"),
+    bottom: Yup.string().required("Required"),
+    left: Yup.string().required("Required"),
+    right: Yup.string().required("Required"),
   });
 
   const formik = useFormik({
@@ -20,44 +35,24 @@ const Home = () => {
     },
     onSubmit: async (values) => {
       try {
-        const payload = {
-          top: "",
-          bottom: "",
-          left: "",
-          right: "",
-        };
-        // setUpdating(true);
-        // setError("");
-        // const resp = await login({ variables: payload });
-
-        // if (
-        //   resp &&
-        //   resp.data &&
-        //   resp.data.login &&
-        //   resp.data.login.status === 200
-        // ) {
-        //   localStorage.setItem("token", resp.data.login.token);
-        //   navigate("./dashboard");
-        // }
-
-        // if (
-        //   resp &&
-        //   resp.data &&
-        //   resp.data.login &&
-        //   resp.data.login.status === 400
-        // ) {
-        //   setError(resp.data.login.message);
-        //   return;
-        // }
-      } catch (err) {
-        // setUpdating(false);
-        // const e = err as any;
-        // if (e && e.graphQLErrors && e.graphQLErrors.length > 0) {
-        //   setError(e.graphQLErrors[0].message);
-        // } else {
-        //   setError("Something went wrong");
-        //   Toast.error("Something went wrong");
-        // }
+        setLoading(true);
+        await client
+          .get(
+            `?bbox=${values.left},${values.bottom},${values.right},${values.top}`
+          )
+          .then((response) => {
+            const data = response.data;
+            if (data) {
+              console.log(data, "data");
+              setLoading(false);
+              const geoJSON = osmtogeojson(data);
+              console.log(geoJSON, "geojson");
+              Toast.success("working");
+            }
+          });
+      } catch (error: any) {
+        Toast.error(error?.response?.data || error.message);
+        setLoading(false);
       }
     },
   });
@@ -76,22 +71,28 @@ const Home = () => {
             <Input
               type="text"
               name="left"
-              placeholder="Left longitude"
+              placeholder="Minimum Longitude"
               value={formik.values.left}
               containerClass={HomeStyles.home_content_children_form_input}
               onChange={formik.handleChange}
               error={formik.submitCount > 0 && formik.errors.left}
               autoComplete="off"
             />
-            {/* LEFT is the longitude of the left (westernmost) side of the bounding
-            box. BOTTOM is the latitude of the bottom (southernmost) side of the
-            bounding box. RIGHT is the longitude of the right (easternmost) side
-            of the bounding box. TOP is the latitude of the top (northernmost)
-            side of the bounding box. */}
+
+            <Input
+              type="text"
+              name="bottom"
+              placeholder="Minimum Latitude"
+              value={formik.values.bottom}
+              containerClass={HomeStyles.home_content_children_form_input}
+              onChange={formik.handleChange}
+              error={formik.submitCount > 0 && formik.errors.bottom}
+              autoComplete="off"
+            />
             <Input
               type="text"
               name="right"
-              placeholder="Right longitude"
+              placeholder="Maximum Longitude"
               value={formik.values.right}
               containerClass={HomeStyles.home_content_children_form_input}
               onChange={formik.handleChange}
@@ -101,29 +102,19 @@ const Home = () => {
             <Input
               type="text"
               name="top"
-              placeholder="Top latitude"
+              placeholder="Maximum Latitude"
               value={formik.values.top}
               containerClass={HomeStyles.home_content_children_form_input}
               onChange={formik.handleChange}
               error={formik.submitCount > 0 && formik.errors.top}
               autoComplete="off"
             />
-            <Input
-              type="text"
-              name="bottom"
-              placeholder="Bottom latitude"
-              value={formik.values.bottom}
-              containerClass={HomeStyles.home_content_children_form_input}
-              onChange={formik.handleChange}
-              error={formik.submitCount > 0 && formik.errors.bottom}
-              autoComplete="off"
-            />
             <Button
               className={HomeStyles.home_content_children_form_btn}
-              title="Login"
+              title="Locate"
               color="primary"
               type="submit"
-              // isLoading={updating}
+              isLoading={loading}
               disabled={formik.isSubmitting}
             />
           </form>

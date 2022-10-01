@@ -1,4 +1,5 @@
 import React from "react";
+import { ToastProvider } from "react-toast-notifications";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
@@ -12,7 +13,9 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ToastProvider>
+        <App />
+      </ToastProvider>
     </Provider>
   </React.StrictMode>
 );
