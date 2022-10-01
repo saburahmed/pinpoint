@@ -15,17 +15,14 @@
   z-index: 2000;
   &_content {
     width: 90%;
-    height: fit-content;
+    // height: fit-content;
+    height: 90vh;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     &_closeicon {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: right;
-      position: relative;
       &_item {
         position: absolute;
         top: 16px;

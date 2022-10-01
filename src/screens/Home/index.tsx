@@ -3,6 +3,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import osmtogeojson from "osmtogeojson";
+import { setGeoJSONData } from "../../features/modal/modalSlice";
+import { useAppDispatch } from "../../app/hooks";
 import useToast from "../../util/useToast";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -10,6 +12,7 @@ import MapModal from "../../modal_views/MapModal";
 import HomeStyles from "./Home.module.scss";
 
 const Home = () => {
+  const dispatch = useAppDispatch();
   const Toast = useToast();
   const client = axios.create({
     baseURL: `https://www.openstreetmap.org/api/0.6/map`,
@@ -43,15 +46,14 @@ const Home = () => {
           .then((response) => {
             const data = response.data;
             if (data) {
-              console.log(data, "data");
               setLoading(false);
               const geoJSON = osmtogeojson(data);
-              console.log(geoJSON, "geojson");
+              dispatch(setGeoJSONData(geoJSON));
               setShowModal(true);
             }
           });
       } catch (error: any) {
-        Toast.error(error?.response?.data || error.message);
+        Toast.error(error?.response?.data || error?.message);
         setLoading(false);
       }
     },
@@ -84,7 +86,7 @@ const Home = () => {
             <Input
               type="text"
               name="left"
-              placeholder="Minimum Longitude"
+              placeholder="Minimum Longitude, eg. -0.4"
               value={formik.values.left}
               containerClass={HomeStyles.home_content_children_form_input}
               onChange={formik.handleChange}
@@ -95,7 +97,7 @@ const Home = () => {
             <Input
               type="text"
               name="bottom"
-              placeholder="Minimum Latitude"
+              placeholder="Minimum Latitude, eg. 2.28"
               value={formik.values.bottom}
               containerClass={HomeStyles.home_content_children_form_input}
               onChange={formik.handleChange}
@@ -105,7 +107,7 @@ const Home = () => {
             <Input
               type="text"
               name="right"
-              placeholder="Maximum Longitude"
+              placeholder="Maximum Longitude, eg. 0.1"
               value={formik.values.right}
               containerClass={HomeStyles.home_content_children_form_input}
               onChange={formik.handleChange}
@@ -115,7 +117,7 @@ const Home = () => {
             <Input
               type="text"
               name="top"
-              placeholder="Maximum Latitude"
+              placeholder="Maximum Latitude, eg. 2.30"
               value={formik.values.top}
               containerClass={HomeStyles.home_content_children_form_input}
               onChange={formik.handleChange}

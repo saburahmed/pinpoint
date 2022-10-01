@@ -2,22 +2,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface UserState {
-  modal: string;
+  geoJSONData: any;
 }
 
-export const modalSlice = createSlice({
-  name: "modal",
+export const mapSlice = createSlice({
+  name: "map",
   initialState: {
-    isShowModal: false,
+    geoJSONData: null,
   },
   reducers: {
-    setIsShowModal: (state: any, param: any) => {
+    setGeoJSONData: (state: any, param: any) => {
       const { payload } = param;
-      state.isShowPassModal = payload;
+      state.geoJSONData = payload;
     },
   },
 });
 
-const { actions, reducer } = modalSlice;
-export const { setIsShowModal } = actions;
+const { actions, reducer } = mapSlice;
+export const { setGeoJSONData } = actions;
 export default reducer;
