@@ -7,11 +7,11 @@ interface IModal extends React.HTMLProps<HTMLDivElement> {
   onClose: () => void;
 }
 
-const Modal: FC<IModal> = ({ children, show, onClose }) => {
+const Modal: FC<IModal> = ({ children, show, onClose, ...props }) => {
   if (!show) return <></>;
 
   return (
-    <div className={ModalStyles.modal}>
+    <div className={ModalStyles.modal} {...props}>
       <div className={ModalStyles.modal_content}>
         <div className={ModalStyles.modal_content_closeicon}>
           <ModalCloseIcon

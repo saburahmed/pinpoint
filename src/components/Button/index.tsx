@@ -8,7 +8,6 @@ type buttonProps = {
   isLoading?: boolean;
   disabled?: boolean;
   type?: "button" | "submit" | "reset" | undefined;
-  color?: "primary" | undefined;
   width?: string;
   borderRadius?: string;
   fontSize?: string;
@@ -27,7 +26,6 @@ const Button: FC<buttonProps> = ({
   isLoading,
   disabled,
   type,
-  color,
   width,
   borderRadius,
   fontSize,
