@@ -3,23 +3,31 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import osmtogeojson from "osmtogeojson";
-import { setGeoJSONData } from "../../features/modal/modalSlice";
-import { useAppDispatch } from "../../app/hooks";
+import {
+  setGeoJSONData,
+  setIsMapModal,
+  setIsMapEvent,
+  setIsBackupMap,
+} from "../../features/modal/modalSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import useToast from "../../util/useToast";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import MapModal from "../../modal_views/MapModal";
 import HomeStyles from "./Home.module.scss";
+import MarkerModal from "../../modal_views/MarkerModal";
 
 const Home = () => {
   const dispatch = useAppDispatch();
+  const isMapModalSelector = useAppSelector((state) => state.map.isMapModal);
+  const isMarkerModalSelector = useAppSelector((state) => state.map.isMapEvent);
+
   const Toast = useToast();
   const client = axios.create({
     baseURL: `https://www.openstreetmap.org/api/0.6/map`,
   });
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false);
 
   const inputValidationSchema = Yup.object().shape({
     top: Yup.string().required("Required"),
@@ -49,7 +57,7 @@ const Home = () => {
               setLoading(false);
               const geoJSON = osmtogeojson(data);
               dispatch(setGeoJSONData(geoJSON));
-              setShowModal(true);
+              dispatch(setIsMapModal(true));
             }
           });
       } catch (error: any) {
@@ -59,15 +67,34 @@ const Home = () => {
     },
   });
 
+  const onCloseMarkerModal = () => {
+    dispatch(setIsMapModal(true));
+    dispatch(setIsMapEvent(false));
+  };
+
+  const onCloseMapModal = () => {
+    dispatch(setIsMapModal(false));
+    dispatch(setIsBackupMap(false));
+  };
+
   const renderModal = () => {
     const mapModal = (
       <MapModal
-        showMapModal={showModal}
-        onCloseMapModal={() => setShowModal(false)}
+        showMapModal={isMapModalSelector}
+        onCloseMapModal={onCloseMapModal}
       />
     );
 
-    return mapModal;
+    const markerModal = (
+      <MarkerModal
+        showMarkerModal={isMarkerModalSelector}
+        onCloseMarkerModal={onCloseMarkerModal}
+      />
+    );
+
+    return isMapModalSelector && !isMarkerModalSelector
+      ? mapModal
+      : markerModal;
   };
 
   return (
@@ -126,7 +153,6 @@ const Home = () => {
             <Button
               className={HomeStyles.home_content_children_form_btn}
               title="Locate"
-              color="primary"
               type="submit"
               isLoading={loading}
               disabled={formik.isSubmitting}
