@@ -1,9 +1,10 @@
 import { FC, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { setBackupMapData } from "../../features/modal/modalSlice";
+import MapEvents from "../../components/MapEvents";
 import Modal from "../../components/Modal";
 import Button from "../../components/Button";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import MapStyles from "./MapModal.module.scss";
 
 type mapModalProps = {
@@ -88,6 +89,7 @@ const MapModal: FC<mapModalProps> = ({ showMapModal, onCloseMapModal }) => {
                         {item.properties.NAME ||
                           "Oops!! I've forgotten the name😩"}
                       </Popup>
+                      <MapEvents />
                     </Marker>
                   ))}
                 </MapContainer>

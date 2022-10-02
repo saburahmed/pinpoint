@@ -42,7 +42,7 @@ export const mapSlice = createSlice({
     },
     setBackupMapData: (state: any, param: any) => {
       const { payload } = param;
-      state.backupMapData = state?.backupMapData?.features?.push(payload);
+      state?.backupMapData?.features?.push(payload);
     },
   },
 });
