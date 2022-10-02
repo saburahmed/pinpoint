@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import ButtonStyle from "./Button.module.scss";
 
 type buttonProps = {

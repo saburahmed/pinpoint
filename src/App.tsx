@@ -1,14 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./screens/Home";
 import "./App.scss";
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Home />} />
-          {/* <Route path="/get-started" element={<GetStarted />} />
+    <ErrorBoundary>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<Home />} />
+            {/* <Route path="/get-started" element={<GetStarted />} />
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/dashboard" element={<Dashboard />}>
             <Route index element={<Home />} />
@@ -22,9 +24,10 @@ function App() {
             <Route path="settings" element={<Settings />} />
             <Route path="stores" element={<Stores />} />
           </Route> */}
-        </Routes>
-      </BrowserRouter>
-    </div>
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </ErrorBoundary>
   );
 }
 

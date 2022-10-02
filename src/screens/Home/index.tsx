@@ -64,7 +64,6 @@ const Home = () => {
       <MapModal
         showMapModal={showModal}
         onCloseMapModal={() => setShowModal(false)}
-        onClickAwayMapModal={() => setShowModal(false)}
       />
     );
 
