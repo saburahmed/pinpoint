@@ -1,9 +1,4 @@
-/* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
-
-export interface UserState {
-  geoJSONData: any;
-}
 
 export const mapSlice = createSlice({
   name: "map",
