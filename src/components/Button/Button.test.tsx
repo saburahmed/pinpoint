@@ -1,3 +1,5 @@
+/* eslint-disable testing-library/prefer-screen-queries */
+
 // Important Events
 // 1. Should render the button title correctly.
 // 2. Should call the onPress successfully.
