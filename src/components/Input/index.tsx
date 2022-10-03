@@ -39,7 +39,6 @@ const Input: FC<IInputProps> = ({
 }) => {
   return (
     <>
-      {/* <div className={`${InputStyles.input} ${containerClass}`}> */}
       <div
         className={
           !error

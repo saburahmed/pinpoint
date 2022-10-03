@@ -7,12 +7,12 @@ import Modal from "../../components/Modal";
 import Button from "../../components/Button";
 import MapStyles from "./MapModal.module.scss";
 
-type mapModalProps = {
+export interface IMapModalProps {
   showMapModal: boolean;
   onCloseMapModal: () => void;
-};
+}
 
-const MapModal: FC<mapModalProps> = ({ showMapModal, onCloseMapModal }) => {
+const MapModal: FC<IMapModalProps> = ({ showMapModal, onCloseMapModal }) => {
   const dispatch = useAppDispatch();
   const mapData: any = useAppSelector((state) => state?.map?.geoJSONData);
   const backupMapData: any = useAppSelector((state) => state.map.backupMapData);

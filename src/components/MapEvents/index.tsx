@@ -9,10 +9,6 @@ import { Marker, useMapEvents } from "react-leaflet";
 
 const MapEvents = () => {
   const dispatch = useAppDispatch();
-  //   const markerCoordinatesSelector = useAppSelector(
-  //     (state) => state.map.markerCoordinates
-  //   );
-
   const [position, setPosition] = useState(null);
 
   useMapEvents({
