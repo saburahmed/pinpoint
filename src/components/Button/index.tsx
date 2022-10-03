@@ -1,7 +1,7 @@
 import { FC } from "react";
 import ButtonStyle from "./Button.module.scss";
 
-type buttonProps = {
+export interface IButtonProps {
   className?: string;
   onPress?: () => void;
   title: string;
@@ -15,11 +15,10 @@ type buttonProps = {
   textAlign?: any;
   padding?: string;
   fontWeight?: number;
-  icon?: any;
   cursor?: string;
-};
+}
 
-const Button: FC<buttonProps> = ({
+const Button: FC<IButtonProps> = ({
   className,
   onPress,
   title,
@@ -33,13 +32,11 @@ const Button: FC<buttonProps> = ({
   textAlign,
   padding,
   fontWeight,
-  icon,
   cursor,
   ...props
 }) => {
   return (
     <button
-      // eslint-disable-next-line react/button-has-type
       type={type}
       onClick={onPress}
       disabled={isLoading || disabled}
@@ -57,7 +54,6 @@ const Button: FC<buttonProps> = ({
       }}
     >
       {isLoading ? "Loading..." : title}
-      {icon && <span>{icon}</span>}
     </button>
   );
 };
