@@ -4,7 +4,7 @@
 // 2. Should change value onChange.
 
 import Input, { IInputProps } from "./index";
-import { fireEvent, render, cleanup, getByText } from "@testing-library/react";
+import { fireEvent, render, cleanup } from "@testing-library/react";
 
 const makeSut = (props: Partial<IInputProps>) => {
   return render(
@@ -28,13 +28,15 @@ describe("<Input />", () => {
     expect(getByPlaceholderText(/Test placeholder here/)).toBeInTheDocument();
   });
 
-  it("should be able to type name input field", () => {
+  test("should be able to type into input field", () => {
     const { getByTestId } = makeSut({
-      value: "Sabur Ahmed",
+      value: "2.8",
     });
 
-    fireEvent.change(getByTestId("input"));
+    const element = getByTestId("input") as HTMLInputElement;
 
-    expect(getByTestId("input").value).toBe("Sabur Ahmed");
+    fireEvent.change(element);
+
+    expect(element.value).toBe("2.8");
   });
 });
