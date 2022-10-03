@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { ReactComponent as ModalCloseIcon } from "../../assets/images/modal-close-icon.svg";
 import ModalStyles from "./Modal.module.scss";
 
-interface IModal extends React.HTMLProps<HTMLDivElement> {
+export interface IModal extends React.HTMLProps<HTMLDivElement> {
   show?: boolean;
   onClose: () => void;
 }
