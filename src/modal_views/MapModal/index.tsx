@@ -1,11 +1,11 @@
 import { FC } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { setIsBackupMap } from "../../features/modal/modalSlice";
+import MapEvents from "../../components/MapEvents";
 import Modal from "../../components/Modal";
 import Button from "../../components/Button";
 import MapStyles from "./MapModal.module.scss";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import MapEvents from "../../components/MapEvents";
 
 export interface IMapModalProps {
   showMapModal: boolean;
