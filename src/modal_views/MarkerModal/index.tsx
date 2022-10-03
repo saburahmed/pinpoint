@@ -60,15 +60,18 @@ const MarkerModal: FC<markerModalProps> = ({
       //   style={{ background: "rgba(0, 14, 41, 1)" }}
       //   className={MarkerModalStyles.modal}
     >
-      <div className={MarkerModalStyles.home}>
-        <div className={MarkerModalStyles.home_content}>
-          <div className={MarkerModalStyles.home_content_children}>
-            <div className={MarkerModalStyles.home_content_children_logo}>
+      <div className={MarkerModalStyles.marker}>
+        <div className={MarkerModalStyles.marker_content}>
+          <div className={MarkerModalStyles.marker_content_children}>
+            <div className={MarkerModalStyles.marker_content_children_logo}>
               .Pinpoint.
             </div>
+            <p className={MarkerModalStyles.marker_content_children_subtext}>
+              Tell us the name of this location
+            </p>
             <form
               onSubmit={formik.handleSubmit}
-              className={MarkerModalStyles.home_content_children_form}
+              className={MarkerModalStyles.markercontent_children_form}
             >
               <Input
                 type="text"
@@ -76,7 +79,7 @@ const MarkerModal: FC<markerModalProps> = ({
                 placeholder="Location name, eg. Apple Campus"
                 value={formik.values.name}
                 containerClass={
-                  MarkerModalStyles.home_content_children_form_input
+                  MarkerModalStyles.marker_content_children_form_input
                 }
                 onChange={formik.handleChange}
                 error={formik.submitCount > 0 && formik.errors.name}
@@ -84,7 +87,7 @@ const MarkerModal: FC<markerModalProps> = ({
               />
 
               <Button
-                className={MarkerModalStyles.home_content_children_form_btn}
+                className={MarkerModalStyles.marker_content_children_form_btn}
                 title="Pinpoint"
                 type="submit"
                 isLoading={formik.isSubmitting}

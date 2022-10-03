@@ -23,6 +23,7 @@ const Home = () => {
   const isMarkerModalSelector = useAppSelector((state) => state.map.isMapEvent);
 
   const Toast = useToast();
+  // I decided not to create an axios hook since I'm not calling endpoint anywhere else, this is to reduce ambiguity.
   const client = axios.create({
     baseURL: `https://www.openstreetmap.org/api/0.6/map`,
   });

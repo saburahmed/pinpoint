@@ -1,19 +1,16 @@
-import React, { FC } from "react";
+import React, { FC, ChangeEvent, HTMLInputTypeAttribute } from "react";
 import { ReactComponent as InputErrorIcon } from "../../assets/images/input-error-icon.svg";
 import InputStyles from "./Input.module.scss";
 
-export interface IInputProps {
+export interface IInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string | boolean;
   icon?: any;
-  moneyFormat?: boolean;
-  label?: string;
   name?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onFocus?: () => void;
-  onBlur?: () => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  type?: any;
-  value?: any;
+  type?: HTMLInputTypeAttribute;
+  value: string | number;
   disabled?: boolean;
   autoComplete?: string;
   title?: string;
@@ -26,12 +23,8 @@ export interface IInputProps {
 const Input: FC<IInputProps> = ({
   error,
   icon,
-  moneyFormat,
-  label,
   name,
   onChange,
-  onFocus,
-  onBlur,
   placeholder,
   type,
   value,
@@ -57,6 +50,7 @@ const Input: FC<IInputProps> = ({
         <div className={InputStyles.input_content}>
           {icon && <div className={InputStyles.input_content_icon}>{icon}</div>}
           <input
+            data-testid="input"
             type={type}
             required={required}
             name={name}
@@ -65,8 +59,6 @@ const Input: FC<IInputProps> = ({
             autoComplete={autoComplete}
             value={value}
             onChange={onChange}
-            onBlur={onBlur}
-            onFocus={onFocus}
             className={`${InputStyles.input_content_field} ${inputClass}`}
             pattern={pattern}
             {...props}

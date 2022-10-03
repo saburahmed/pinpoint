@@ -76,7 +76,8 @@ const MapModal: FC<mapModalProps> = ({ showMapModal, onCloseMapModal }) => {
 
                     <p className={MapStyles.map_error_wrapper_content_subtext}>
                       You can click the button below to play around and add
-                      markers to the map or close the modal to try again.
+                      markers to the map by clicking it or close the modal to
+                      try again.
                     </p>
 
                     <div className={MapStyles.map_error_wrapper_content_button}>
