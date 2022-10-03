@@ -1,3 +1,7 @@
+// Important Events
+// 1. Should render the button title correctly.
+// 2. Should call the onPress successfully.
+
 import Button, { IButtonProps } from "./index";
 import { fireEvent, render } from "@testing-library/react";
 
