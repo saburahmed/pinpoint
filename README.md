@@ -1,11 +1,13 @@
 # This is Pinpoint!
 
-This project was a play project to look into the world of GeoJSON and using Leaflet to display the location.
+This project was a play project to look into the world of GeoJSON and using Leaflet to display the location.\
+
+Feel free to click on the map to add markers and check the code base to see how it works.
 
 # Tools Used
 
-TypeScript, ReactJS, SCSS Modules, Redux Toolkit, LeafletJS.
-Feel free to clone and raise and suggest fixes.
+TypeScript, ReactJS, SCSS Modules, Redux Toolkit, LeafletJS, React Testing Library (and Jest).\
+Feel free to clone and suggest fixes, we can even upgrade this into a map game.
 
 ## Available Scripts
 
