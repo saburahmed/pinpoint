@@ -1,14 +1,11 @@
+/* eslint-disable testing-library/prefer-screen-queries */
 // Important Events
 // 1. Should render the input placeholder correctly.
-// 2. Value must be empty at first.
 // 2. Should change value onChange.
 
 import Input, { IInputProps } from "./index";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, cleanup, getByText } from "@testing-library/react";
 
-const value = "This is input testing";
-
-//Used the SUT — System Under Test below to centralise my actor, it's cleaner and easier to make changes on tests, also it allows me to focus on the behavior I'm working on.
 const makeSut = (props: Partial<IInputProps>) => {
   return render(
     <Input
@@ -20,21 +17,24 @@ const makeSut = (props: Partial<IInputProps>) => {
   );
 };
 
-describe("<Button />", () => {
-  test("Should render placeholder correctly", () => {
-    const { getByRole } = makeSut({ placeholder: "Test placeholder here" });
+describe("<Input />", () => {
+  afterEach(cleanup);
 
-    expect(getByRole("input")).toBeInTheDocument();
+  test("Should render placeholder correctly", () => {
+    const { getByPlaceholderText } = makeSut({
+      placeholder: "Test placeholder here",
+    });
+
+    expect(getByPlaceholderText(/Test placeholder here/)).toBeInTheDocument();
   });
 
-  test("Should call onChange successfully", () => {
-    const spy = jest.fn();
+  it("should be able to type name input field", () => {
+    const { getByTestId } = makeSut({
+      value: "Sabur Ahmed",
+    });
 
-    const { getByText } = makeSut({ value: spy });
+    fireEvent.change(getByTestId("input"));
 
-    fireEvent.change(getByText(value));
-    // fireEvent.change(<Input />, { target: { value: "matti" } });
-
-    expect(spy).toHaveBeenCalled();
+    expect(getByTestId("input").value).toBe("Sabur Ahmed");
   });
 });

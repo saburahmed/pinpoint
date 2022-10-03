@@ -1,9 +1,9 @@
-import { FC } from "react";
+import { FC, HTMLProps } from "react";
 import ButtonStyle from "./Button.module.scss";
 
-export interface IButtonProps {
+export interface IButtonProps extends HTMLProps<HTMLButtonElement> {
   className?: string;
-  onPress?: () => void;
+  onPress?: React.MouseEventHandler<HTMLButtonElement>;
   title: string;
   isLoading?: boolean;
   disabled?: boolean;

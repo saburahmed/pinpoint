@@ -1,15 +1,16 @@
-import React, { FC, ChangeEvent } from "react";
+import React, { FC, ChangeEvent, HTMLInputTypeAttribute } from "react";
 import { ReactComponent as InputErrorIcon } from "../../assets/images/input-error-icon.svg";
 import InputStyles from "./Input.module.scss";
 
-export interface IInputProps {
+export interface IInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string | boolean;
   icon?: any;
   name?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  type?: any;
-  value?: any;
+  type?: HTMLInputTypeAttribute;
+  value: string | number;
   disabled?: boolean;
   autoComplete?: string;
   title?: string;
@@ -49,6 +50,7 @@ const Input: FC<IInputProps> = ({
         <div className={InputStyles.input_content}>
           {icon && <div className={InputStyles.input_content_icon}>{icon}</div>}
           <input
+            data-testid="input"
             type={type}
             required={required}
             name={name}

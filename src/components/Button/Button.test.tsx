@@ -3,13 +3,18 @@
 // 2. Should call the onPress successfully.
 
 import Button, { IButtonProps } from "./index";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, cleanup } from "@testing-library/react";
 
+//Used the SUT — System Under Test below to centralise my actor,
+// it's cleaner and easier to make changes on tests,
+// also it allows me to focus on the behavior I'm working on.
 const makeSut = (props: Partial<IButtonProps>) => {
   return render(<Button title="title" onPress={jest.fn()} {...props} />);
 };
 
 describe("<Button />", () => {
+  afterEach(cleanup);
+
   test("Should render title correctly", () => {
     const { getByText } = makeSut({ title: "Test Button" });
 
@@ -19,9 +24,9 @@ describe("<Button />", () => {
   test("Should call onPress successfully", () => {
     const spy = jest.fn();
 
-    const { getByText } = makeSut({ onPress: spy });
+    const { getByRole } = makeSut({ onPress: spy });
 
-    fireEvent.click(getByText(/title/));
+    fireEvent.click(getByRole("button"));
 
     expect(spy).toHaveBeenCalled();
   });
