@@ -7,7 +7,7 @@ Feel free to click on the map to add markers and check the code base to see how 
 # Tools Used
 
 TypeScript, ReactJS, SCSS Modules, Redux Toolkit, LeafletJS, React Testing Library (and Jest).\
-Feel free to clone and suggest fixes, we can even upgrade this into a map game.
+Feel free to clone and suggest fixes, we can even upgrade this into a map game or a travel diary.
 
 ## Available Scripts
 
