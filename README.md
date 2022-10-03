@@ -1,13 +1,12 @@
 # This is Pinpoint!
 
 This project was a play project to look into the world of GeoJSON and using Leaflet to display the location.\
-
-Feel free to click on the map to add markers and check the code base to see how it works.
+Click on the map to add markers and check the code base to see how it works.
 
 # Tools Used
 
 TypeScript, ReactJS, SCSS Modules, Redux Toolkit, LeafletJS, React Testing Library (and Jest).\
-Feel free to clone and suggest fixes, we can even upgrade this into a map game or a travel diary.
+Feel free to clone and suggest fixes, this app would be upgraded this into a map game or a travel diary.
 
 ## Available Scripts
 
@@ -23,8 +22,7 @@ You will also see any lint errors in the console.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.
 
 ### `yarn build`
 
@@ -32,9 +30,6 @@ Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `yarn eject`
 
