@@ -30,10 +30,6 @@ describe("<Input />", () => {
 
     fireEvent.click(getByText(/close/i));
 
-    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(1);
   });
-
-  //   test("Children should get displayed", () => {
-  //     const { getByText } = makeSut({ test });
-  //   });
 });
