@@ -33,9 +33,9 @@ const MapModal: FC<IMapModalProps> = ({ showMapModal, onCloseMapModal }) => {
             />
 
             {mapData?.features?.map((item: any, index: number) => (
-              <Marker key={index} position={item.geometry.coordinates}>
+              <Marker key={index} position={item?.geometry?.coordinates}>
                 <Popup>
-                  {item.properties.NAME || "Oops!! I've forgotten the name😩"}
+                  {item?.properties?.NAME || "Oops!! I've forgotten the name😩"}
                 </Popup>
               </Marker>
             ))}
@@ -55,9 +55,9 @@ const MapModal: FC<IMapModalProps> = ({ showMapModal, onCloseMapModal }) => {
                 />
 
                 {backupMapData?.features?.map((item: any, index: number) => (
-                  <Marker key={index} position={item.geometry.coordinates}>
+                  <Marker key={index} position={item?.geometry?.coordinates}>
                     <Popup>
-                      {item.properties.NAME ||
+                      {item?.properties?.NAME ||
                         "Oops!! I've forgotten the name😩"}
                     </Popup>
                     <MapEvents />
