@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import * as Yup from "yup";
 import Modal from "../../components/Modal";
 import Input from "../../components/Input";
@@ -23,7 +23,7 @@ const MarkerModal: FC<markerModalProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const markerCoordinatesSelector = useAppSelector(
-    (state) => state.map.markerCoordinates
+    (state) => state?.map?.markerCoordinates
   );
 
   const inputValidationSchema = Yup.object().shape({
@@ -54,12 +54,7 @@ const MarkerModal: FC<markerModalProps> = ({
   });
 
   return (
-    <Modal
-      onClose={onCloseMarkerModal}
-      show={showMarkerModal}
-      //   style={{ background: "rgba(0, 14, 41, 1)" }}
-      //   className={MarkerModalStyles.modal}
-    >
+    <Modal onClose={onCloseMarkerModal} show={showMarkerModal}>
       <div className={MarkerModalStyles.marker}>
         <div className={MarkerModalStyles.marker_content}>
           <div className={MarkerModalStyles.marker_content_children}>

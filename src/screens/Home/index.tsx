@@ -53,7 +53,7 @@ const Home = () => {
             `?bbox=${values.left},${values.bottom},${values.right},${values.top}`
           )
           .then((response) => {
-            const data = response.data;
+            const data = response?.data;
             if (data) {
               setLoading(false);
               const geoJSON = osmtogeojson(data);
